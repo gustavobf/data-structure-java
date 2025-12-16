@@ -96,7 +96,7 @@ public class BinaryTree {
         return list;
     }
 
-    public boolean breadthFirstSearch(int needle) {
+    public boolean breadthFirstSearch (int needle) {
 
         Queue<Node> queue = new LinkedList<>();
         queue.add(root);
@@ -117,6 +117,43 @@ public class BinaryTree {
             }
         }
         return false;
+    }
+
+    public static boolean compare (Node first, Node second) {
+
+        if (first == null && second == null) {
+            return true;
+        }
+
+        if (first == null || second == null) {
+            return false;
+        }
+
+        if (first.value != second.value) {
+            return false;
+        }
+
+        return compare(first.left, second.left) && compare(first.right, second.right);
+
+    }
+
+    private boolean depthFirstSearch(Node node, int needle) {
+        if (node == null) {
+            return false;
+        }
+
+        if (node.value == needle) {
+            return true;
+        }
+
+        if (node.value < needle) {
+            return depthFirstSearch(node.right, needle);
+        }
+        return depthFirstSearch(node.left, needle);
+    }
+
+    public boolean searchByDepthFirstSearch(int needle) {
+        return depthFirstSearch(root, needle);
     }
 
 }
